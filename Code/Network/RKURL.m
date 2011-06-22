@@ -20,7 +20,7 @@
 - (id)initWithBaseURLString:(NSString*)baseURLString resourcePath:(NSString*)resourcePath {
     NSString* completeURL = [NSString stringWithFormat:@"%@%@", baseURLString, resourcePath];
     
-    completeURL = [completeURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	completeURL = [(NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)completeURL, NULL, (CFStringRef)@"+", kCFStringEncodingUTF8) autorelease];
     
     if ((self = [self initWithString:completeURL])) {
 		_baseURLString = [baseURLString copy];
